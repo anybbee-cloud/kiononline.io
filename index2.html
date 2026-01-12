@@ -1,245 +1,226 @@
-
 <!DOCTYPE html>
 <html lang="lo">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@100..900&display=swap" rel="stylesheet">
-<title>ລາຍຈ່າຍ 10 + Total (ບັນທຶກໄວ້)</title>
+<title>ລາຍຈ່າຍ + Total</title>
+
 <style>
-  body{margin:0;font-family:"Noto Sans Lao", Inter, system-ui;background: var(--bg);color:#111827;padding:22px}
-  h2 { color: #333; }
-  table { width: 100%; border-collapse: collapse; margin-top: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
-  th, td { border: 1px solid #9c9c9c; padding: 10px; text-align: center; }
-  th { background: linear-gradient(90deg, #5ce4e7, #07a8ff); color: white; font-weight: bold; }
-  td[contenteditable="true"] { background: #ffffff; border-radius: 4px; min-width: 60px; }
-  tfoot td { font-weight: bold; background: #dfe6e9; }
-  button { cursor: pointer; padding: 6px 12px; border: none; border-radius: 5px; background: #0984e3; color: white; transition: 0.3s; }
-  button:hover { background: #74b9ff; }
-  .addRowBtn { margin-top: 10px; background: #00b894; }
-  .addRowBtn:hover { background: #55efc4; }
-  .clearBtn { margin-top: 10px; background: #d63031; }
-  .clearBtn:hover { background: #ff7675; }
-  #goHome { margin-bottom:15px; padding:8px 16px; background:#009f95; color:white; border:none; border-radius:6px; font-size:16px; }
-  #goHome:hover { background:#ff0000; }
-  .popup-overlay {
-    display: none; position: fixed; top:0; left:0; width:100%; height:100%;
-    background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 1000;
-  }
-  .popup { background: #fff; padding: 25px 35px; border-radius: 12px; text-align: center; max-width: 320px; width: 90%; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: fadeIn 0.3s ease; }
-  .popup button { margin: 12px; padding: 8px 16px; }
-  #confirmDelete { background: #d63031; color: white; }
-  #confirmDelete:hover { background: #ff7675; }
-  #cancelDelete { background: #b2bec3; }
-  #cancelDelete:hover { background: #636e72; }
-  @keyframes fadeIn { from {opacity:0; transform: translateY(-20px);} to {opacity:1; transform: translateY(0);} }
+body{margin:0;font-family:"Noto Sans Lao",system-ui;background:#f5f6fa;color:#111;padding:22px}
+h2{color:#333}
+table{width:100%;border-collapse:collapse;margin-top:10px;box-shadow:0 3px 10px rgba(0,0,0,.1);border-radius:8px;overflow:hidden;background:#fff}
+th,td{border:1px solid #9c9c9c;padding:10px;text-align:center}
+th{background:linear-gradient(90deg,#5ce4e7,#07a8ff);color:#fff;font-weight:bold}
+td[contenteditable]{background:#fff;border-radius:4px;min-width:60px}
+tfoot td{font-weight:bold;background:#dfe6e9}
+button{cursor:pointer;padding:6px 12px;border:none;border-radius:6px;background:#0984e3;color:#fff}
+button:hover{background:#74b9ff}
+.addRowBtn{margin-top:10px;background:#00b894}
+.clearBtn{margin-top:10px;background:#d63031}
+#goHome{margin-bottom:15px;background:#009f95}
+#goHome:hover{background:#ff0000}
 </style>
 </head>
+
 <body>
 
 <button id="goHome">🏠 ກັບໄປ Home</button>
 
-<!-- <h2>ລາຍຈ່າຍ(ໜ້າຮ້ານ)</h2>
-<table class="expenseTable" data-id="table1">
-  <thead>
-    <tr>
-      <th>ຈຳນວນ</th>
-      <th>ວັນທີເດືອນ/ປີ ເວລາ</th>
-      <th>ໝາຍເເຫດ</th>
-      <th>ຈໍານວນເງິນ</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-  <tfoot>
-    <tr>
-      <td colspan="3">Total</td>
-      <td class="totalAmount">0</td>
-      <td></td>
-    </tr>
-  </tfoot>
+<h2>ລາຍຈ່າຍ (ONLINE)</h2>
+<table class="expenseTable" data-id="online">
+<thead>
+<tr>
+  <th>#</th>
+  <th>ວັນທີ / ເວລາ</th>
+  <th>ລາຍການ</th>
+  <th>ຈຳນວນເງິນ</th>
+  <th>Action</th>
+</tr>
+</thead>
+<tbody></tbody>
+<tfoot>
+<tr>
+  <td colspan="3">Total</td>
+  <td class="totalAmount">0</td>
+  <td></td>
+</tr>
+</tfoot>
 </table>
-<button class="addRowBtn">📁 ເພີ້ມແຖວ</button> -->
 
-<h2>ລາຍຈ່າຍ(ອອນລາຍ ONLINE)</h2>
-<table class="expenseTable" data-id="table2">
-  <thead>
-    <tr>
-      <th>ຈຳນວນ</th>
-      <th>ວັນທີເດືອນ/ປີ ເວລາ</th>
-      <th>ໝາຍເເຫດ</th>
-      <th>ຈໍານວນເງິນ</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-  <tfoot>
-    <tr>
-      <td colspan="3">Total</td>
-      <td class="totalAmount">0</td>
-      <td></td>
-    </tr>
-  </tfoot>
-</table>
-<button class="addRowBtn">➕ ເພີ້ມແຖວ</button>
+<button class="addRowBtn">➕ ເພີ່ມແຖວ</button>
 
 <h2>Grand Total</h2>
-<div id="grandTotal" style="font-size:20px; font-weight:bold; color:#2d3436;">0</div>
+<div id="grandTotal" style="font-size:20px;font-weight:bold">0</div>
 
-<button id="clearAll" class="clearBtn">🧹 ລ້າງຂໍ້ມູນທັງໝົດ</button>
-<button id="sendWhatsapp" style="margin-top:15px; background:#25d366; font-size:16px;">
-📤 ສົ່ງຂໍ້ມູນໄປ WhatsApp
+<button id="clearAll" class="clearBtn">🧹 ລ້າງຂໍ້ມູນ</button>
+<button id="sendWhatsapp" style="margin-top:15px;background:#25d366;font-size:16px">
+📤 ສົ່ງໄປ WhatsApp
 </button>
 
-<div class="popup-overlay" id="popupOverlay">
-  <div class="popup">
-    <p>ທ່ານຕ້ອງການລົບແຖວນີ້ຈິງຫລື?</p>
-    <button id="confirmDelete">ຢືນຢັນ</button>
-    <button id="cancelDelete">ຍົກເລີກ</button>
-  </div>
-</div>
-
 <script>
-let rowToDelete = null;
-document.getElementById('goHome').addEventListener('click', ()=>{ window.location.href = 'index.html'; });
-function getTableKey(table){ return 'expense_'+table.dataset.id; }
-function addRow(tbody, index, data={}){
-  const tr = document.createElement('tr');
-  tr.innerHTML = `
+/* ======================
+   Navigation
+====================== */
+document.getElementById('goHome').onclick=()=>location.href='index.html'
+
+/* ======================
+   Helpers (ของเดิม)
+====================== */
+function getKey(){ return 'expense_online' }
+function nowText(){
+  const d=new Date()
+  const day=String(d.getDate()).padStart(2,'0')
+  const month=String(d.getMonth()+1).padStart(2,'0')
+  const year=d.getFullYear()
+  const h=String(d.getHours()).padStart(2,'0')
+  const m=String(d.getMinutes()).padStart(2,'0')
+  return `${day}/${month}/${year} ${h}:${m}`
+}
+function parseNum(t){
+  const n=parseInt(t.replace(/,/g,''))
+  return isNaN(n)?0:n
+}
+
+/* ======================
+   Table Logic
+====================== */
+const table=document.querySelector('.expenseTable')
+const tbody=table.querySelector('tbody')
+
+function addRow(index,data={}){
+  const tr=document.createElement('tr')
+  tr.innerHTML=`
     <td>${index}</td>
-    <td contenteditable="true" class="date">${data.date||'--/--/---- --:--'}</td>
-    <td contenteditable="true" class="remark">${data.remark||`ລາຍການ ${index}`}</td>
-    <td contenteditable="true" class="amount">${data.amount||'0'}</td>
-    <td><button class="deleteBtn">🗑️ລົບຂໍ້ມູນ</button></td>
-  `;
-  tbody.appendChild(tr);
-}
-document.querySelectorAll('.expenseTable').forEach(table=>{
-  const tbody = table.querySelector('tbody');
-  const saved = JSON.parse(localStorage.getItem(getTableKey(table)))||[];
-  if(saved.length>0){ saved.forEach((row,i)=>addRow(tbody,i+1,row)); }
-  else { for(let i=1;i<=1;i++) addRow(tbody,i); }
-  updateTotal(table);
-});
-document.querySelectorAll('.addRowBtn').forEach((btn, idx)=>{
-  btn.addEventListener('click', ()=>{
-    const table = document.querySelectorAll('.expenseTable')[idx];
-    const tbody = table.querySelector('tbody');
-    const newIndex = tbody.querySelectorAll('tr').length+1;
-    addRow(tbody,newIndex);
-    updateTotal(table);
-    saveTable(table);
-  });
-});
-document.body.addEventListener('click', e=>{
-  if(e.target.classList.contains('deleteBtn')){
-    rowToDelete = e.target.closest('tr');
-    document.getElementById('popupOverlay').style.display='flex';
-  }
-});
-document.getElementById('confirmDelete').addEventListener('click', ()=>{
-  if(rowToDelete){
-    const table = rowToDelete.closest('table');
-    rowToDelete.remove();
-    table.querySelectorAll('tbody tr').forEach((tr,i)=>tr.children[0].textContent=i+1);
-    updateTotal(table);
-    saveTable(table);
-    rowToDelete=null;
-  }
-  document.getElementById('popupOverlay').style.display='none';
-});
-document.getElementById('cancelDelete').addEventListener('click', ()=>{
-  rowToDelete=null;
-  document.getElementById('popupOverlay').style.display='none';
-});
-
-function updateTotal(table){
-  let total=0;
-  table.querySelectorAll('.amount').forEach(a=>{
-    const val = parseInt(a.textContent.replace(/,/g,''));
-    if(!isNaN(val)) total+=val;
-  });
-  table.querySelector('.totalAmount').textContent = total.toLocaleString();
-  updateGrandTotal();
-}
-function updateGrandTotal(){
-  let grand=0;
-  document.querySelectorAll('.expenseTable').forEach(table=>{
-    const val = parseInt(table.querySelector('.totalAmount').textContent.replace(/,/g,''));
-    if(!isNaN(val)) grand+=val;
-  });
-  document.getElementById('grandTotal').textContent = grand.toLocaleString();
+    <td class="date">${data.date||'--/--/---- --:--'}</td>
+    <td contenteditable class="remark">${data.remark||'ລາຍການ '+index}</td>
+    <td contenteditable class="amount">${data.amount||'0'}</td>
+    <td><button class="del">🗑</button></td>
+  `
+  tbody.appendChild(tr)
 }
 
-// แก้ไข remark / amount
-document.body.addEventListener('input', e=>{
-  const tr = e.target.closest('tr');
-  const table = e.target.closest('table');
-  if(e.target.classList.contains('remark')){
-    const now = new Date();
-    const day = String(now.getDate()).padStart(2,'0');
-    const month = String(now.getMonth()+1).padStart(2,'0');
-    const year = now.getFullYear();
-    const hours = String(now.getHours()).padStart(2,'0');
-    const minutes = String(now.getMinutes()).padStart(2,'0');
-    tr.querySelector('.date').textContent = `${day}/${month}/${year} ${hours}:${minutes}`;
+/* ======================
+   Load
+====================== */
+const saved=JSON.parse(localStorage.getItem(getKey()))||[]
+if(saved.length){
+  saved.forEach((r,i)=>addRow(i+1,r))
+}else addRow(1)
+updateTotal()
+
+/* ======================
+   Events
+====================== */
+document.querySelector('.addRowBtn').onclick=()=>{
+  addRow(tbody.children.length+1)
+  save()
+  updateTotal()
+}
+
+document.body.addEventListener('click',e=>{
+  if(e.target.classList.contains('del')){
+    e.target.closest('tr').remove()
+    Array.from(tbody.children).forEach((tr,i)=>tr.children[0].textContent=i+1)
+    save()
+    updateTotal()
   }
+})
+
+/* ===== INPUT (ของเดิม + กันพัง) ===== */
+document.body.addEventListener('input',e=>{
+  const tr=e.target.closest('tr')
+  if(!tr) return
+
+  if(
+    e.target.classList.contains('remark') ||
+    e.target.classList.contains('amount')
+  ){
+    tr.querySelector('.date').textContent=nowText()
+  }
+
+  
+
+  save()
+  updateTotal()
+})
+
+document.body.addEventListener('blur',e=>{
   if(e.target.classList.contains('amount')){
-    let val = e.target.textContent.replace(/,/g,'').replace(/[^\d]/g,'');
-    e.target.textContent = val;
+    const v=parseNum(e.target.textContent)
+    e.target.textContent=v.toLocaleString()
+    save()
+    updateTotal()
   }
-  updateTotal(table);
-  saveTable(table);
-});
+},true)
 
-// format comma on blur
-document.body.addEventListener('blur', e=>{
-  if(e.target.classList.contains('amount')){
-    let val = parseInt(e.target.textContent.replace(/,/g,''));
-    e.target.textContent = !isNaN(val)? val.toLocaleString():'0';
-    const table = e.target.closest('table');
-    updateTotal(table);
-    saveTable(table);
-  }
-}, true);
+/* ======================
+   Calculate / Save
+====================== */
+function updateTotal(){
+  let total=0
+  tbody.querySelectorAll('.amount').forEach(td=>{
+    total+=parseNum(td.textContent)
+  })
+  table.querySelector('.totalAmount').textContent=total.toLocaleString()
+  document.getElementById('grandTotal').textContent=total.toLocaleString()
 
-function saveTable(table){
-  const data = [];
-  table.querySelectorAll('tbody tr').forEach(tr=>{
+  // sync ไป INDEX.HTML
+  localStorage.setItem('expense_from_index2', total)
+}
+
+function save(){
+  const data=[]
+  tbody.querySelectorAll('tr').forEach(tr=>{
     data.push({
-      date: tr.querySelector('.date').textContent,
-      remark: tr.querySelector('.remark').textContent,
-      amount: tr.querySelector('.amount').textContent
-    });
-  });
-  localStorage.setItem(getTableKey(table), JSON.stringify(data));
+      date:tr.querySelector('.date').textContent,
+      remark:tr.querySelector('.remark').textContent,
+      amount:tr.querySelector('.amount').textContent
+    })
+  })
+  localStorage.setItem(getKey(),JSON.stringify(data))
 }
 
-document.getElementById('clearAll').addEventListener('click', ()=>{
-  if(confirm("ຢືນຢັນລ້າງຂໍ້ມູນທັງໝົດ?")){
-    localStorage.clear();
-    location.reload();
+/* ======================
+   Clear
+====================== */
+document.getElementById('clearAll').onclick=()=>{
+  if(confirm('ຢືນຢັນລ້າງຂໍ້ມູນ?')){
+    localStorage.clear()
+    location.reload()
   }
-});
+}
 
-document.getElementById('sendWhatsapp').addEventListener('click', ()=>{
-  let message = "📊 ລາຍງານຄ່າໃຊ້ຈ່າຍ\n\n";
-  document.querySelectorAll('.expenseTable').forEach((table, idx)=>{
-    message += (idx===0? "🛒 ຄ່າໃຊ້ຈ່າຍ(ໜ້າຮ້ານ)\n":"🌐 ຄ່າໃຊ້ຈ່າຍ(ອອນລາຍ)\n");
-    table.querySelectorAll('tbody tr').forEach(tr=>{
-      const date = tr.querySelector('.date').textContent;
-      const remark = tr.querySelector('.remark').textContent;
-      const amount = tr.querySelector('.amount').textContent;
-      message += `- ${date} | ${remark} | ${amount}\n`;
-    });
-    message += `Total: ${table.querySelector('.totalAmount').textContent}\n\n`;
+/* ======================
+   WhatsApp (ของเดิม)
+====================== */
+document.getElementById('sendWhatsapp').onclick = () => {
+  let msg = " ລາຍງານຄ່າໃຊ້ຈ່າຍ\n\n";
+
+  msg += "🛒 ລາຍຈ່າຍ (ONLINE)\n";
+
+  document.querySelectorAll('.expenseTable tbody tr').forEach(tr => {
+    const date = tr.querySelector('.date').textContent;
+    const remark = tr.querySelector('.remark').textContent;
+    const amountEl = tr.querySelector('.amount');
+    const amount = amountEl.value ?? amountEl.textContent;
+
+    msg += `-  ${date} | ${remark} =  ${amount}\n`;
   });
-  const grand = document.getElementById('grandTotal')?.textContent || "";
-  message += `💰 Grand Total: ${grand}`;
-  const url = "https://wa.me/?text=" + encodeURIComponent(message);
-  window.open(url, "_blank");
-});
+
+  const total = document.querySelector('.totalAmount').textContent;
+  msg += `\n Total: ${total}\n`;
+
+  
+
+  window.open(
+    "https://wa.me/?text=" + encodeURIComponent(msg),
+    "_blank"
+  );
+};
+
+
 </script>
+
 </body>
 </html>
-
