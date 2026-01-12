@@ -1,3 +1,4 @@
+
 <html lang="lo"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -767,7 +768,23 @@
   </script>
   
   
-  
+  <script>
+    function syncExpenseFromIndex2(){
+      const expense = localStorage.getItem('expense_from_index2');
+      const el = document.getElementById('expense');
+    
+      if(el){
+        el.textContent = expense ? Number(expense).toLocaleString() : '0';
+      }
+    }
+    
+    // โหลดครั้งแรก
+    syncExpenseFromIndex2();
+    
+    // อัปเดตทุก 1 วินาที (กรณีเปิด 2 หน้าไว้พร้อมกัน)
+    setInterval(syncExpenseFromIndex2, 1000);
+    </script>
+    
   
   </div></body></html>
   
